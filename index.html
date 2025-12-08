@@ -3,26 +3,34 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BUG SENDER v9.0</title>
+<title>BUG PRANK v9.0</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container" id="main">
+
   <div class="card">
-    <img src="https://files.catbox.moe/ede478.jpg" class="avatar" alt="Putzz XD">
-    <div class="username">Putzzdev</div>
+    <img src="https://files.catbox.moe/ede478.jpg" class="avatar" alt="Avatar">
+    <div class="username" id="displayUsername">Putzzdev</div> <!-- Akan diganti otomatis -->
     <div class="tag">"PREMIUM"</div>
     <div class="role">Role: OWNER • Exp: 30d</div>
   </div>
 
   <div class="card">
+
+    <h2 class="glow-text">USERNAME</h2>
+    <input type="text" placeholder="Masukkan nama kamu" id="username">
+
+    <h2 class="glow-text">KEY</h2>
+    <input type="text" placeholder="Masukkan key..." id="key">
+
     <h2 class="glow-text">TARGET NUMBER</h2>
     <input type="text" placeholder="e.g. 628xxxxxxxxxxxx" id="target">
 
     <h2 class="glow-text">MENU BUG</h2>
     <select id="bug">
-      <option>Select Bug...</option>
+      <option value="">Select Bug...</option>
       <option value="crash">crash Android</option>
       <option value="delay">delay invisible</option>
       <option value="system">blank ui</option>
@@ -30,13 +38,14 @@
     </select>
 
     <button onclick="sendBug()">SEND BUG</button>
+
   </div>
 </div>
 
 <div class="copyright">©Inisial "O"</div>
 
-<div class="chaos" id="chaos">
-  <h1>Putz XD LOCK😈</h1>
+<div class="chaos" id="chaos" style="display:none;">
+  <h1 id="lockText">LOCK😈</h1> <!-- Username akan muncul di sini juga -->
   <h2>404 HACKED</h2>
   <h3>VIRUS RANSOMWARE</h3>
   <div class="scanline"></div>
@@ -47,6 +56,53 @@
   <source src="sound.mp3" type="audio/mpeg">
 </audio>
 
-<script src="script.js"></script>
+<script>
+// 7 key yang diperbolehkan
+const validKeys = [
+  "KEY1",
+  "KEY2",
+  "KEY3",
+  "KEY4",
+  "KEY5",
+  "KEY6",
+  "KEY7"
+];
+
+function sendBug() {
+  const user = document.getElementById("username").value.trim();
+  const key = document.getElementById("key").value.trim();
+  const bug = document.getElementById("bug").value;
+
+  if (!user) {
+    alert("Isi username dulu!");
+    return;
+  }
+
+  if (!validKeys.includes(key)) {
+    alert("Key salah! Gunakan salah satu dari 7 key.");
+    return;
+  }
+
+  if (!bug) {
+    alert("Pilih bug prank!");
+    return;
+  }
+
+  // Ganti username di card
+  document.getElementById("displayUsername").textContent = user;
+
+  // Ganti username di chaos
+  document.getElementById("lockText").textContent = `${user} LOCK😈`;
+
+  // Tampilkan chaos
+  document.getElementById("chaos").style.display = "block";
+
+  // Mainkan suara
+  const audio = document.getElementById("hackerMusic");
+  audio.currentTime = 0;
+  audio.play();
+}
+</script>
+
 </body>
-</html>
+  </html>
